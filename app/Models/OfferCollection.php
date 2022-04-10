@@ -6,7 +6,6 @@ namespace App\Models;
 
 use App\Interfaces\OfferCollectionInterface;
 use App\Interfaces\OfferInterface;
-use App\Interfaces\ReaderInterface;
 use ArrayIterator;
 use Iterator;
 
@@ -16,7 +15,6 @@ class OfferCollection implements OfferCollectionInterface
     public $offerInterface;
     public function __construct(OfferInterface $offerInterface){
         $this->offerInterface = $offerInterface;
-//
     }
     public $array;
 
@@ -43,7 +41,6 @@ class OfferCollection implements OfferCollectionInterface
 
     public function getIterator(): Iterator
     {
-        $iterator = new ArrayIterator($this->array);
-        return $iterator;
+        return new ArrayIterator($this->array);
     }
 }

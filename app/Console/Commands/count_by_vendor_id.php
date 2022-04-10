@@ -21,7 +21,7 @@ class count_by_vendor_id extends Command
      *
      * @var string
      */
-    protected $description = 'Count number of offers between to given title';
+    protected $description = 'Count number of offers with specific vendor Id';
 
     /**
      * Execute the console command.

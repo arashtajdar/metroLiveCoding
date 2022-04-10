@@ -3,8 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\OfferController;
-use App\Interfaces\ReaderInterface;
-use App\Interfaces\ReaderInterface as ReaderInterfaceAlias;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;

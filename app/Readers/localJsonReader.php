@@ -6,7 +6,6 @@ namespace App\Readers;
 
 use App\Interfaces\OfferCollectionInterface;
 use App\Interfaces\ReaderInterface;
-use App\Models\OfferCollection;
 
 class localJsonReader implements ReaderInterface
 {

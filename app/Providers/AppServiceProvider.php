@@ -20,7 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
         App::bind( ReaderInterface::class , localJsonReader::class );
         App::bind( OfferCollectionInterface::class , OfferCollection::class );
         App::bind( OfferInterface::class , Offer::class );

@@ -21,7 +21,7 @@ class count_by_product_title extends Command
      *
      * @var string
      */
-    protected $description = 'Count number of offers between to given title';
+    protected $description = 'Count number of offers contains given title';
 
     /**
      * Execute the console command.

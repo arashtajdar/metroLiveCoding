@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\OfferCollectionInterface;
-use App\Interfaces\OfferInterface;
 use App\Interfaces\ReaderInterface;
-use App\Readers\localJsonReader;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -16,16 +11,14 @@ class OfferController extends Controller
     public $reader;
     public $arrayString;
 
-    public function __construct(ReaderInterface $reader, OfferCollectionInterface $offerCollection)
+    public function __construct(ReaderInterface $reader)
     {
         $this->reader = $reader;
     }
 
     public function countByPriceRange(float $price_from, float $price_to): int
     {
-        $arrayString = $this->getArrayString();
-
-        $iterator = $this->reader->read($arrayString)->getArray();
+        $iterator = $this->reader->read($this->getArrayString())->getArray();
         $result = array_filter($iterator, function ($val) use ($price_from, $price_to) {
             return $val->price > $price_from && $val->price < $price_to;
         });
@@ -35,8 +28,7 @@ class OfferController extends Controller
 
     public function countByTitle(string $title): int
     {
-        $arrayString = $this->getArrayString();
-        $iterator = $this->reader->read($arrayString)->getArray();
+        $iterator = $this->reader->read($this->getArrayString())->getArray();
         $result = array_filter($iterator, function ($val) use ($title) {
             return Str::contains($val->productTitle, $title);
         });
@@ -45,8 +37,7 @@ class OfferController extends Controller
     }
     public function countByVendorId(int $vendorId): int
     {
-        $arrayString = $this->getArrayString();
-        $iterator = $this->reader->read($arrayString)->getArray();
+        $iterator = $this->reader->read($this->getArrayString())->getArray();
         $result = array_filter($iterator, function ($val) use ($vendorId) {
             return $val->vendorId == $vendorId;
         });
@@ -54,10 +45,10 @@ class OfferController extends Controller
         return count($result);
     }
 
-    public function getArrayString()
+    public function getArrayString(): string
     {
-        //        $response = Http::get("https://api.publicapis.org/entries");
-//        $arrayString = json_encode($response->json());
+        //$response = Http::get("https://api.publicapis.org/entries");
+        //$arrayString = json_encode($response->json());
         $arrayString = '[
                         {
                             "offerId": 123,

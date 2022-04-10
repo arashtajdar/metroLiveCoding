@@ -11,7 +11,6 @@ class Offer implements OfferInterface
 
     public function get(): array
     {
-        // TODO: Implement get() method.
-        return [3,5,4];
+        return [];
     }
 }
