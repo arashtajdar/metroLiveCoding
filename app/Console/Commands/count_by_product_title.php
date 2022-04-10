@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 
-class count_by_production_title extends Command
+class count_by_product_title extends Command
 {
     /**
      * The name and signature of the console command.
