@@ -8,6 +8,7 @@ use App\Interfaces\ReaderInterface;
 use App\Readers\localJsonReader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class OfferController extends Controller
@@ -20,14 +21,15 @@ class OfferController extends Controller
         $this->reader = $reader;
     }
 
-    public function countByPriceRange(float $price_from, float $priceTo): int
+    public function countByPriceRange(float $price_from, float $price_to): int
     {
         $arrayString = $this->getArrayString();
 
         $iterator = $this->reader->read($arrayString)->getArray();
-        $result = array_filter($iterator, function ($val) use ($price_from, $priceTo) {
-            return $val->price > $price_from && $val->price < $priceTo;
+        $result = array_filter($iterator, function ($val) use ($price_from, $price_to) {
+            return $val->price > $price_from && $val->price < $price_to;
         });
+        Log::debug('Count requested for the offers with price range between '.$price_from . " to " .$price_to);
         return count($result);
     }
 
@@ -38,6 +40,7 @@ class OfferController extends Controller
         $result = array_filter($iterator, function ($val) use ($title) {
             return Str::contains($val->productTitle, $title);
         });
+        Log::debug('Count requested for the offers with title which contains '.$title);
         return count($result);
     }
     public function countByVendorId(int $vendorId): int
@@ -47,6 +50,7 @@ class OfferController extends Controller
         $result = array_filter($iterator, function ($val) use ($vendorId) {
             return $val->vendorId == $vendorId;
         });
+        Log::debug('Count requested for the offers with vendor id equal to '.$vendorId);
         return count($result);
     }
 
@@ -74,6 +78,7 @@ class OfferController extends Controller
                             "price": 333.0
                         }
                     ]';
+        Log::debug('Data fetched !');
         return $arrayString;
     }
 }
