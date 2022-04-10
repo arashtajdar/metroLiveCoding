@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\OfferController;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\App;
 
 class count_by_vendor_id extends Command
 {
@@ -11,14 +13,14 @@ class count_by_vendor_id extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'count_by_vendor_id {vendor_id}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Count number of offers between to given title';
 
     /**
      * Execute the console command.
@@ -27,6 +29,11 @@ class count_by_vendor_id extends Command
      */
     public function handle()
     {
-        return 0;
+        $OfferController = App::make(OfferController::class);
+        $vendorId = $this->argument('vendor_id');
+        $int = $OfferController->countByVendorId($vendorId);
+
+        $this->info($int);
+        return true;
     }
 }
