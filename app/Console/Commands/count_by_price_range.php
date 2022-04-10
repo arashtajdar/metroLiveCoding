@@ -34,9 +34,8 @@ class count_by_price_range extends Command
         $OfferController = App::make(OfferController::class);
         $price_from = $this->argument('price_from');
         $price_to = $this->argument('price_to');
-        $int = $OfferController->countByPriceRange($price_from,$price_to);
-
-        $this->info($int);
+        $count = $OfferController->countByPriceRange($price_from,$price_to);
+        $this->info($count);
         return true;
     }
 }

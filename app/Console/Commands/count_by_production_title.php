@@ -31,9 +31,8 @@ class count_by_production_title extends Command
     {
         $OfferController = App::make(OfferController::class);
         $title = $this->argument('title');
-        $int = $OfferController->countByTitle($title);
-
-        $this->info($int);
+        $count = $OfferController->countByTitle($title);
+        $this->info($count);
         return true;
     }
 }

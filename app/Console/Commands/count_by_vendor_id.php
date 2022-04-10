@@ -31,9 +31,8 @@ class count_by_vendor_id extends Command
     {
         $OfferController = App::make(OfferController::class);
         $vendorId = $this->argument('vendor_id');
-        $int = $OfferController->countByVendorId($vendorId);
-
-        $this->info($int);
+        $count = $OfferController->countByVendorId($vendorId);
+        $this->info($count);
         return true;
     }
 }
