@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Http\Controllers\OfferController;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 
 class count_by_production_title extends Command
 {
@@ -33,6 +34,7 @@ class count_by_production_title extends Command
         $title = $this->argument('title');
         $count = $OfferController->countByTitle($title);
         $this->info($count);
+        Log::debug('The result is : '.$count);
         return true;
     }
 }

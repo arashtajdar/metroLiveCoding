@@ -7,6 +7,7 @@ use App\Interfaces\ReaderInterface;
 use App\Interfaces\ReaderInterface as ReaderInterfaceAlias;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 
 class count_by_price_range extends Command
 {
@@ -35,6 +36,7 @@ class count_by_price_range extends Command
         $price_from = $this->argument('price_from');
         $price_to = $this->argument('price_to');
         $count = $OfferController->countByPriceRange($price_from,$price_to);
+        Log::debug('The result is : '.$count);
         $this->info($count);
         return true;
     }

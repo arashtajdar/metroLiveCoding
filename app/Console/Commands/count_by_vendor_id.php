@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Http\Controllers\OfferController;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 
 class count_by_vendor_id extends Command
 {
@@ -32,6 +33,7 @@ class count_by_vendor_id extends Command
         $OfferController = App::make(OfferController::class);
         $vendorId = $this->argument('vendor_id');
         $count = $OfferController->countByVendorId($vendorId);
+        Log::debug('The result is : '.$count);
         $this->info($count);
         return true;
     }
